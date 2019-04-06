@@ -9,5 +9,13 @@ def two_sum(nums, target)
     }
 end
 
-p two_sum([11, 15, 2, 7], 9)
+def two_sum2(nums, target)
+    nums.count.times { |n|
+        if index = nums.index(target - nums[n])
+            break [n, index] unless n == index
+        end
+    }
+end
 
+p two_sum([11, 15, 2, 7], 9)
+p two_sum2([11, 15, 2, 7], 9)
