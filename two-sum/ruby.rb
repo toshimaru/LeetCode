@@ -17,5 +17,17 @@ def two_sum2(nums, target)
     }
 end
 
+def two_sum3(nums, target)
+    hash = {}
+    nums.each.with_index { |num, i|
+        if val = hash[num]
+            break [val, i]
+        else
+            hash[target - num] = i
+        end
+    }
+end
+
 p two_sum([11, 15, 2, 7], 9)
 p two_sum2([11, 15, 2, 7], 9)
+p two_sum3([11, 15, 2, 7], 9)
