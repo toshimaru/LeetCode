@@ -3,9 +3,9 @@ def longest_common_prefix(strs)
     min = strs.map(&:length).min
     word = strs.pop
     a = 0
-    min.times.each { |i|
+    min.times { |i|
         if strs.all? { |w| w[i] == word[i] }
-           a = i + 1
+            a = i + 1
         else
             break
         end
