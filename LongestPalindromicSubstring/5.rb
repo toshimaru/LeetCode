@@ -7,7 +7,7 @@ def longest_palindrome(s)
     max = 1
     max_i = 0
     (l-1).times do |i|
-        _max = [calc_max(s, i, i+1), calc_max(s, i-1, i+1)].max
+        _max = [palindrome_length(s, i, i+1), palindrome_length(s, i-1, i+1)].max
         if _max > max
             max = _max
             max_i = i
@@ -19,7 +19,7 @@ def longest_palindrome(s)
     s[head..tail]
 end
 
-def calc_max(s, l, r)
+def palindrome_length(s, l, r)
     while s[l] == s[r] && l >= 0
         l -= 1
         r += 1
