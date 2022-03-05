@@ -29,7 +29,36 @@ def three_sum(nums)
   r
 end
 
+require 'set'
+def three_sum_with_set(nums)
+  r = Set.new
+  len = nums.sort!.size
+  (len - 2).times do |i|
+    left, right = i + 1, len - 1
+    while left < right
+      sum = nums[i] + nums[left] + nums[right]
+      if sum == 0
+        r << [nums[i], nums[left], nums[right]]
+        left += 1
+        right -= 1
+      elsif sum > 0
+        right -= 1
+      else
+        left += 1
+      end
+    end
+  end
+  r.to_a
+end
+
 nums = [-1, 0, 1, 2, -1, -4]
 p three_sum(nums)
+p three_sum_with_set(nums)
+
 nums = [0,0,0]
 p three_sum(nums)
+p three_sum_with_set(nums)
+
+nums = [3,0,-2,-1,1,2]
+p three_sum(nums)
+p three_sum_with_set(nums)
