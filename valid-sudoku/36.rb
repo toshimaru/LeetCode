@@ -3,23 +3,19 @@
 def is_valid_sudoku(board)
     a, b, c = [], [], []
     9.times do |i|
-        row = []
-        col = []
+        row, col = [], []
         9.times do |j|
             row << board[i][j]
             col << board[j][i]
         end
-        return false unless valid?(row)
-        return false unless valid?(col)
+        return false if !valid?(row) || !valid?(col)
 
         a += row[0..2]
         b += row[3..5]
         c += row[6..8]
 
         if (i + 1) % 3 == 0
-            return false unless valid?(a)
-            return false unless valid?(b)
-            return false unless valid?(c)
+            return false if !valid?(a) || !valid?(b) || !valid?(c)
             a, b, c = [], [], []
         end
     end
