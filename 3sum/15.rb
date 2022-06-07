@@ -1,12 +1,11 @@
-# def three_sum(nums)
-#     nums.combination(3).each do |_nums|
-#         r << _nums.sort if _nums.sum == 0
-#     end
-#     r.uniq
-# end
-
 # @param {Integer[]} nums
 # @return {Integer[][]}
+def easy_three_sum(nums)
+  nums.combination(3).each_with_object([]) do |nums_comb, ary|
+    ary << nums_comb.sort if nums_comb.sum == 0
+  end.uniq
+end
+
 def three_sum(nums)
   r = []
   len = nums.sort!.size
@@ -51,14 +50,28 @@ def three_sum_with_set(nums)
   r.to_a
 end
 
-nums = [-1, 0, 1, 2, -1, -4]
-p three_sum(nums)
-p three_sum_with_set(nums)
+require 'benchmark/ips'
 
-nums = [0,0,0]
-p three_sum(nums)
-p three_sum_with_set(nums)
+Benchmark.ips do |x|
+  nums = [-1, 0, 1, 2, -1, -4]
+  x.report('easy_three_sum') { easy_three_sum(nums) }
+  x.report('three_sum') { three_sum(nums) }
+  x.report('three_sum_with_set') { three_sum_with_set(nums) }
+  x.compare!
 
-nums = [3,0,-2,-1,1,2]
-p three_sum(nums)
-p three_sum_with_set(nums)
+  nums = [0, 0, 0]
+  x.report('easy_three_sum') { easy_three_sum(nums) }
+  x.report('three_sum') { three_sum(nums) }
+  x.report('three_sum_with_set') { three_sum_with_set(nums) }
+  x.compare!
+
+  nums = [3, 0, -2, -1, 1, 2]
+  x.report('easy_three_sum') { easy_three_sum(nums) }
+  x.report('three_sum') { three_sum(nums) }
+  x.report('three_sum_with_set') { three_sum_with_set(nums) }
+  x.compare!
+end
+
+# p three_sum(nums)
+# p three_sum_with_set(nums)
+# p three_sum_with_set(nums)
