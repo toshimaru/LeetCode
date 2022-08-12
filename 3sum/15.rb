@@ -10,19 +10,19 @@ def three_sum(nums)
   r = []
   len = nums.sort!.size
   (len - 2).times do |i|
-    if i == 0 || (i > 0 && nums[i] != nums[i - 1])
-      left, right, expected_sum = i + 1, len - 1, 0 - nums[i]
-      while left < right
-        sum = nums[left] + nums[right]
-        left  += 1 and next if sum < expected_sum
-        right -= 1 and next if sum > expected_sum
+    next if i > 0 && nums[i] == nums[i - 1]
 
-        r << [nums[i], nums[left], nums[right]]
-        left  += 1 while left < right && nums[left]  == nums[left + 1]
-        right -= 1 while left < right && nums[right] == nums[right - 1]
-        left  += 1
-        right -= 1
-      end
+    left, right, expected_sum = i + 1, len - 1, 0 - nums[i]
+    while left < right
+      sum = nums[left] + nums[right]
+      left  += 1 and next if sum < expected_sum
+      right -= 1 and next if sum > expected_sum
+
+      r << [nums[i], nums[left], nums[right]]
+      left  += 1 while left < right && nums[left]  == nums[left + 1]
+      right -= 1 while left < right && nums[right] == nums[right - 1]
+      left  += 1
+      right -= 1
     end
   end
   r
@@ -59,7 +59,7 @@ Benchmark.ips do |x|
   x.report('three_sum_with_set') { three_sum_with_set(nums) }
   x.compare!
 
-  nums = [0, 0, 0]
+  nums = [0, 0, 0, 0, 0]
   x.report('easy_three_sum') { easy_three_sum(nums) }
   x.report('three_sum') { three_sum(nums) }
   x.report('three_sum_with_set') { three_sum_with_set(nums) }
