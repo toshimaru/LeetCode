@@ -1,18 +1,18 @@
 # @param {String[]} operations
 # @return {Integer}
 def cal_points(operations)
-    result = []
-    while ope = operations.shift
-        case ope
-        when '+'
-            result << result[-1] + result[-2]
-        when 'D'
-            result << result[-1] * 2
-        when 'C'
-            result.pop
-        else
-            result << ope.to_i
-        end
+  stack = []
+  while ope = operations.shift
+    case ope
+    when '+'
+      stack << stack[-1] + stack[-2]
+    when 'D'
+      stack << stack[-1] * 2
+    when 'C'
+      stack.pop
+    else
+      stack << ope.to_i
     end
-    result.sum
+  end
+  stack.sum
 end
