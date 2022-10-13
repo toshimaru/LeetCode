@@ -27,3 +27,15 @@ def ary_reverse_list(head)
     end
     result
 end
+
+def recursive_reverse_list(head)
+    return if head.nil?
+
+    new_head = head
+    if head.next
+        new_head = reverse_list(head.next)
+        head.next.next = head
+    end
+    head.next = nil
+    new_head
+end
