@@ -9,7 +9,7 @@ class Node
 end
 
 class MyLinkedList1
-    def initialize()
+    def initialize
         @head = nil
         @tail = nil
         @size = 0
@@ -70,7 +70,7 @@ class MyLinkedList1
 end
 
 class MyLinkedList2
-    def initialize()
+    def initialize
         @dummy = Node.new(nil)
         @dummy.next = @dummy
         @dummy.prev = @dummy
