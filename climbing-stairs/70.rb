@@ -5,7 +5,7 @@ def climb_stairs(n)
   ans = 0
   (a+b..n).each do |i|
     ary = Array.new(a) { 2 } + Array.new(b) { 1 }
-    combi = [a,b].any?(&:zero?) ? 1 : factorial(ary.size) / ary.tally.values.inject(1) { | a, n| a *= factorial(n) }
+    combi = [a,b].any?(&:zero?) ? 1 : factorial(ary.size) / ary.tally.values.inject(1) { |a, n| a *= factorial(n) }
     ans += combi
     a -= 1
     b += 2
