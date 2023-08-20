@@ -1,15 +1,19 @@
 # @param {Integer[]} nums
 # @return {Integer[]}
+# def sort_array1(nums)
+  # nums.sort!
+# end
+
 def sort_array(nums)
   return nums if nums.size <= 1
 
   mid = nums.size / 2
   left = sort_array(nums[...mid])
   right = sort_array(nums[mid..])
-  merge2(left, right)
+  merge(left, right)
 end
 
-def merge2(ary1, ary2)
+def merge(ary1, ary2)
   i, j, merged_ary = 0, 0, []
 
   while i < ary1.size && j < ary2.size
@@ -32,4 +36,3 @@ def merge2(ary1, ary2)
   end
   merged_ary
 end
-
