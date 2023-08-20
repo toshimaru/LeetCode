@@ -12,9 +12,9 @@ def find_kth_largest(nums, k)
   pivot = nums.sample
   lesser, equals, greater = [], [], []
   nums.each do |i|
-    if i > pivot then greater << i
-    elsif i < pivot then lesser << i
-    else equals << i
+    if    i > pivot then greater << i
+    elsif i < pivot then lesser  << i
+    else  equals << i
     end
   end
 
