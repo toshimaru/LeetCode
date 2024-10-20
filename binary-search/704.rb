@@ -6,13 +6,13 @@ def search(nums, target)
   left, right = 0, nums.size - 1
   while left <= right
     mid = (left + right) / 2
-    mid_num = nums[mid]
-    if target == mid_num
-      return mid
-    elsif target < mid_num
+    num = nums[mid]
+    if target > num
+      left = mid + 1
+    elsif target < num
       right = mid - 1
     else
-      left = mid + 1
+      return mid
     end
   end
   -1
