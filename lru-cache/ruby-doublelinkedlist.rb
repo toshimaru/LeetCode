@@ -1,13 +1,3 @@
-class Node
-  attr_accessor :prev, :next
-  attr_reader :key, :val
-
-  def initialize(key, val)
-    @key, @val = key, val
-    @prev = @next = nil
-  end
-end
-
 class LRUCache
   def initialize(capacity)
     @cap = capacity
@@ -30,11 +20,7 @@ class LRUCache
     @hash[key] = Node.new(key, value)
     insert(@hash[key])
 
-    if @hash.length > @cap
-      lru = @left.next
-      remove(lru)
-      @hash.delete(lru.key)
-    end
+    evict if @hash.length > @cap
   end
 
   private
@@ -48,5 +34,21 @@ class LRUCache
     prev, nxt = @right.prev, @right
     prev.next = nxt.prev = node
     node.next, node.prev = nxt, prev
+  end
+
+  def evict
+    lru = @left.next
+    remove(lru)
+    @hash.delete(lru.key)
+  end
+
+  class Node
+    attr_accessor :prev, :next
+    attr_reader :key, :val
+
+    def initialize(key, val)
+      @key, @val = key, val
+      @prev = @next = nil
+    end
   end
 end
