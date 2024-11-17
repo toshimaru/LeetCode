@@ -26,16 +26,15 @@ end
 # Solution2: stack
 def kth_smallest(root, k)
     stack = []
-    res = []
     while stack.any? || root
         while root
             stack << root
             root = root.left
         end
         cur = stack.pop
-        res << cur.val
+        k -= 1
+        return cur.val if k == 0
         root = cur.right
-        return res[k-1] if res.size >= k
     end
     -1
 end
