@@ -5,10 +5,28 @@
 # @param {String} s
 # @param {String} p
 # @return {Boolean}
-def _is_match(s, p)
+def is_match(s, p)
+    @s, @p = s, p
+    @m, @n = s.size, p.size
+    @cache = Array.new(@m + 1) { [] }
+    dfs(0, 0)
 end
 
-def is_match(s, p)
+def dfs(i, j)
+    return i == @m if j == @n
+    return @cache[i][j] unless @cache[i][j].nil?
+
+    match = i < @m && (@s[i] == @p[j] || @p[j] == '.')
+    if j + 1 < @n && @p[j + 1] == '*'
+        return @cache[i][j] = dfs(i, j + 2) || (match && dfs(i + 1, j))
+    end
+
+    return @cache[i][j] = dfs(i + 1, j + 1) if match
+
+    @cache[i][j] = false
+end
+
+def is_match1(s, p)
   return s.empty? if p.empty?
 
   first = !s.empty? && [s[0], '.'].include?(p[0])
@@ -37,6 +55,7 @@ def is_match2(s, p)
 end
 
 
+=begin
 puts is_match("aa", "a")
 puts is_match("a", ".")
 puts is_match("aa", "a*")
@@ -51,3 +70,4 @@ puts is_match2("b", "a*b")
 puts is_match2("by", "a*b.*y")
 puts is_match2("*", "*")
 puts is_match2("", "a*")
+=end
